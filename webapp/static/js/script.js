@@ -43,3 +43,5 @@ function onLoad() {
         link.addEventListener('click', onClick);
     });
 }
+
+window.addEventListener("load", onLoad);
