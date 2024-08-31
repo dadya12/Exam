@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 style="margin-top: 50px">{{ album.name }}
+        <a href="{% url 'webapp:album_update' album.pk %}" class="btn btn-primary">Обновить</a>
+        <a href="{% url 'webapp:album_delete' album.pk %}" class="btn btn-primary">Удалить</a>
+    </h1>
+    <p>{{ album.description }}</p>
+
+    <h2>Фотографии в альбоме:</h2>
+    <div class="row">
+        {% for picture in public_pictures %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="{{ picture.picture.url }}" class="card-img-top" alt="{{ picture.caption }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ picture.caption }}</h5>
+                        <a href="{% url 'webapp:picture_detail' picture.pk %}" class="btn btn-dark">Посмотреть</a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p>Нет фотографий в этом альбоме.</p>
+        {% endfor %}
+    </div>
+
+    <div class="pagination">
+        {% if public_pictures.has_other_pages %}
+            <ul class="pagination">
+                {% if public_pictures.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1">&laquo; первая</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ public_pictures.previous_page_number }}">предыдущая</a>
+                    </li>
+                {% endif %}
+                <li class="page-item active">
+                    <span class="page-link">Страница {{ public_pictures.number }} из {{ public_pictures.paginator.num_pages }}</span>
+                </li>
+                {% if public_pictures.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ public_pictures.next_page_number }}">следующая</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ public_pictures.paginator.num_pages }}">последняя
+                            &raquo;</a>
+                    </li>
+                {% endif %}
+            </ul>
+        {% endif %}
+    </div>
+
+{% endblock %}

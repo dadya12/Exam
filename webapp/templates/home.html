@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Фотографии{% endblock %}
+
+{% block content %}
+    <div class="container" style="margin-bottom: 50px; align-items: center">
+        {% if is_paginated %}
+            {% include 'partial/paginate.html' %}
+        {% endif %}
+    </div>
+    <div class="container mt-4">
+        <div class="row">
+            {% for picture in pictures %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="{{ picture.picture.url }}" class="card-img-top" alt="{{ picture.caption }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ picture.caption }}</h5>
+                            <p class="card-text">
+                                Автор: <a href=""
+                                          style="text-decoration: none; color: black">{{ picture.author.get_full_name }}</a>
+                            </p>
+                            {% if picture.album %}
+                                <p class="card-text">
+                                    Альбом: <a href="{% url 'webapp:album_detail' picture.album.pk %}"
+                                               style="text-decoration: none; color: black">{{ picture.album.name }}</a>
+                                </p>
+                            {% endif %}
+                            <a href="{% url 'webapp:picture_update' picture.pk %}"
+                               class="btn btn-dark">Редактировать</a>
+                            <a href="{% url 'webapp:picture_detail' picture.pk %}" class="btn btn-dark">Подробнее</a>
+                            <a href="{% url 'webapp:picture_delete' picture.pk %}" class="btn btn-dark">Удалить</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Новая фотка{% endblock %}
+
+{% block navbar %}
+{% endblock %}
+
+{% block h1 %}<h1 style="text-align: center; margin-bottom: 50px; margin-top: 50px">Новое фото</h1>{% endblock %}
+
+{% block content %}
+<form method="post" action="{% url 'webapp:picture_create' %}" enctype="multipart/form-data">
+    {% include 'partial/universal_form.html' with value_submit='Добавить' %}
+</form>
+{% endblock %}

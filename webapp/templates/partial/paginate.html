@@ -1,0 +1,22 @@
+<div class="pagination">
+    <span class="step-links" style="display: flex; margin-top: 50px">
+        <a  href="?page=1" style="margin-right: 10px; text-decoration: none"> В начало</a>
+        {% if page_obj.has_previous %}
+            <a  style="margin-right: 10px; text-decoration: none" href="?page={{ page_obj.previous_page_number }}">Назад</a>
+        {% else %}
+            <span class="page-disabled" style="margin-right: 10px">Назад</span>
+        {% endif %}
+        <form class="current-page" method="get">
+            <label for="page" style="margin-right: 10px">
+                Страница <input type="text" name="page" id="page" value="{{ page_obj.number }}">
+                из {{ page_obj.paginator.num_pages }}.
+            </label>
+        </form>
+        {% if page_obj.has_next %}
+            <a style="margin-right: 10px; text-decoration: none" href="?page={{ page_obj.next_page_number }}">Далее</a>
+        {% else %}
+            <span class="page-disabled" style="margin-right: 10px">Далее</span>
+        {% endif %}
+        <a style="margin-right: 10px; text-decoration: none" href="?page={{ page_obj.paginator.num_pages }}">В конец</a>
+    </span>
+</div>
