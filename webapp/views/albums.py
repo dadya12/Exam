@@ -1,11 +1,14 @@
 from django.shortcuts import reverse, redirect
 from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
+from rest_framework.exceptions import PermissionDenied
+
 from webapp.forms import AlbumForm
 from webapp.models import Album, Picture
 from django.core.paginator import Paginator
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class AlbumDetailView(DetailView):
+class AlbumDetailView(LoginRequiredMixin, DetailView):
     model = Album
     template_name = 'albums/album_detail.html'
     context_object_name = 'album'
@@ -20,7 +23,7 @@ class AlbumDetailView(DetailView):
         return context
 
 
-class AlbumCreateView(CreateView):
+class AlbumCreateView(LoginRequiredMixin, CreateView):
     model = Album
     template_name = 'albums/album_create.html'
     form_class = AlbumForm
@@ -38,6 +41,12 @@ class AlbumUpdateView(UpdateView):
     form_class = AlbumForm
     template_name = 'albums/album_update.html'
 
+    def dispatch(self, request, *args, **kwargs):
+        obj = self.get_object()
+        if obj.author != request.user:
+            raise PermissionDenied("You do not have permission to edit this.")
+        return super().dispatch(request, *args, **kwargs)
+
     def form_valid(self, form):
         album = form.save()
         pictures = Picture.objects.filter(album=album)
@@ -52,6 +61,12 @@ class AlbumUpdateView(UpdateView):
 
 class AlbumDeleteView(DeleteView):
     model = Album
+
+    def dispatch(self, request, *args, **kwargs):
+        obj = self.get_object()
+        if obj.author != request.user:
+            raise PermissionDenied("You do not have permission to delete this.")
+        return super().dispatch(request, *args, **kwargs)
 
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()

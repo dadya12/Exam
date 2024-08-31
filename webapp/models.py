@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+import uuid
 
 
 class Picture(models.Model):
@@ -9,7 +10,7 @@ class Picture(models.Model):
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, verbose_name='Автор')
     album = models.ForeignKey('webapp.Album', null=True, blank=True, on_delete=models.CASCADE)
     private = models.BooleanField(default=False)
-    favorite = models.ManyToManyField(get_user_model(), related_name='favorite_pics', null=True, blank=True)
+    favorite = models.ManyToManyField(get_user_model(), related_name='favorite_pics', blank=True)
 
     def __str__(self):
         return self.caption
@@ -21,7 +22,7 @@ class Album(models.Model):
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, verbose_name='Автор')
     created_date = models.DateTimeField(auto_now_add=True, verbose_name='Дата-время-создания')
     private = models.BooleanField(default=False)
-    favorite = models.ManyToManyField(get_user_model(), related_name='favorite_albums', null=True, blank=True)
+    favorite = models.ManyToManyField(get_user_model(), related_name='favorite_albums', blank=True)
 
     def __str__(self):
         return self.name

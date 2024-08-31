@@ -1,6 +1,9 @@
 from django.shortcuts import reverse, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from rest_framework.exceptions import PermissionDenied
+
 from webapp.forms import PictureForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from webapp.models import Picture
 
@@ -20,7 +23,7 @@ class PictureDetailView(DetailView):
     template_name = 'pictures/picture_detail.html'
 
 
-class PictureCreateView(CreateView):
+class PictureCreateView(LoginRequiredMixin, CreateView):
     model = Picture
     form_class = PictureForm
     template_name = 'pictures/picture_create.html'
@@ -43,12 +46,24 @@ class PictureUpdateView(UpdateView):
     form_class = PictureForm
     template_name = 'pictures/picture_update.html'
 
+    def dispatch(self, request, *args, **kwargs):
+        obj = self.get_object()
+        if obj.author != request.user:
+            raise PermissionDenied("You do not have permission to edit this.")
+        return super().dispatch(request, *args, **kwargs)
+
     def get_success_url(self):
         return reverse('webapp:picture_detail', kwargs={'pk': self.object.pk})
 
 
 class PictureDeleteView(DeleteView):
     queryset = Picture.objects.all()
+
+    def dispatch(self, request, *args, **kwargs):
+        obj = self.get_object()
+        if obj.author != request.user:
+            raise PermissionDenied("You do not have permission to delete this.")
+        return super().dispatch(request, *args, **kwargs)
 
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()

@@ -1,9 +1,7 @@
 {% extends 'base.html' %}
-
 {% block content %}
     <h1 style="margin-top: 50px">Профиль</h1>
     <p>Name: {{ user_obj.first_name }} {{ user_obj.last_name }}</p>
-
     <h2>Публичные альбомы:</h2>
     <ul>
         {% for album in user_obj.album_set.all %}
@@ -12,7 +10,6 @@
             <li>No public albums.</li>
         {% endfor %}
     </ul>
-
     <h2>Публичные фото:</h2>
     <ul>
         {% for picture in user_obj.picture_set.all %}
@@ -22,7 +19,7 @@
         {% endfor %}
     </ul>
 
-    {% if user_obj == request.user %}
+    {% if is_own_profile %}
         <h2>Приватные альбомы:</h2>
         <ul>
             {% for album in user_obj.album_set.all %}
@@ -33,7 +30,6 @@
                 <li>Нет приватных альбомов.</li>
             {% endfor %}
         </ul>
-
         <h2>Приватные фото:</h2>
         <ul>
             {% for picture in user_obj.picture_set.all %}
@@ -44,5 +40,7 @@
                 <li>Нет приватных фото без альбомов.</li>
             {% endfor %}
         </ul>
+    {% else %}
+        <h2>Приватные альбомы и фото недоступны.</h2>
     {% endif %}
 {% endblock %}
