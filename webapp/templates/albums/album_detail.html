@@ -6,6 +6,7 @@
         <a href="{% url 'webapp:album_delete' album.pk %}" class="btn btn-primary">Удалить</a>
     </h1>
     <p>{{ album.description }}</p>
+    <p>Автор: {{ album.author }}</p>
 
     <h2>Фотографии в альбоме:</h2>
     <div class="row">

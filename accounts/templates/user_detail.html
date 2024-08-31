@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 style="margin-top: 50px">Профиль</h1>
+    <p>Name: {{ user_obj.first_name }} {{ user_obj.last_name }}</p>
+
+    <h2>Публичные альбомы:</h2>
+    <ul>
+        {% for album in user_obj.album_set.all %}
+            <li><a href="{% url 'webapp:album_detail' pk=album.pk %}">{{ album.name }}</a></li>
+        {% empty %}
+            <li>No public albums.</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Публичные фото:</h2>
+    <ul>
+        {% for picture in user_obj.picture_set.all %}
+            <li><a href="{% url 'webapp:picture_detail' pk=picture.pk %}">{{ picture.caption }}</a></li>
+        {% empty %}
+            <li>No public photos.</li>
+        {% endfor %}
+    </ul>
+
+    {% if user_obj == request.user %}
+        <h2>Приватные альбомы:</h2>
+        <ul>
+            {% for album in user_obj.album_set.all %}
+                {% if album.private %}
+                    <li><a href="{% url 'webapp:album_detail' pk=album.pk %}">{{ album.name }}</a></li>
+                {% endif %}
+            {% empty %}
+                <li>Нет приватных альбомов.</li>
+            {% endfor %}
+        </ul>
+
+        <h2>Приватные фото:</h2>
+        <ul>
+            {% for picture in user_obj.picture_set.all %}
+                {% if picture.private and not picture.album %}
+                    <li><a href="{% url 'webapp:picture_detail' pk=picture.pk %}">{{ picture.caption }}</a></li>
+                {% endif %}
+            {% empty %}
+                <li>Нет приватных фото без альбомов.</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

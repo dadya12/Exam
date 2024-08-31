@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block navbar %}
+
+{% endblock %}
+
+    <title>{% block title %}Вход{% endblock %}</title>
+
+{% block content %}
+    <h1 style="text-align: center; margin-top: 50px">Вход:</h1>
+    <form action="" method="post" class="text-center">
+        {% csrf_token %}
+        {% if has_error %}
+            <p class="form-error">Неверное имя пользователя или пароль.</p>
+        {% endif %}
+        <div class="mb-3">
+            <label for="username" class="form-label">User name:</label>
+            <input type="text" class="form-control mx-auto" name="username" id="username" style="max-width: 300px; border: solid 2px">
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password:</label>
+            <input type="password" class="form-control mx-auto" name="password" id="password" style="max-width: 300px; border: solid 2px">
+        </div>
+        <button type="submit" class="btn btn-outline-success"><b>Войти</b></button>
+{% endblock %}

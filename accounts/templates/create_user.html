@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block navbar %}
+    
+{% endblock %}
+
+    <title>{% block title %}Регистрация{% endblock %}</title>
+
+{% block content %}
+<h1 style="margin-top: 50px; margin-bottom: 50px">Регистрация</h1>
+    <form action="" method="post">
+    {% csrf_token %}
+    {% include 'partial/universal_form.html' with value_submit='Регистрация' %}
+    </form>
+{% endblock %}

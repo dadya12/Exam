@@ -38,6 +38,14 @@ class AlbumUpdateView(UpdateView):
     form_class = AlbumForm
     template_name = 'albums/album_update.html'
 
+    def form_valid(self, form):
+        album = form.save()
+        pictures = Picture.objects.filter(album=album)
+        for picture in pictures:
+            picture.private = album.private
+            picture.save()
+        return super().form_valid(form)
+
     def get_success_url(self):
         return reverse('webapp:album_detail', kwargs={'pk': self.object.pk})
 

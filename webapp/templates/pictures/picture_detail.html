@@ -10,10 +10,17 @@
                     <img src="{{ picture.picture.url }}" class="card-img-top img-fluid" alt="{{ picture.caption }}">
                     <div class="card-body">
                         <h5 class="card-title">{{ picture.caption }}</h5>
-                        <p class="card-text">Автор: <a href="" style="text-decoration: none; color: black">{{ picture.author.get_full_name }}</a></p>
+                        <p class="card-text">Автор: <a href=""
+                                                       style="text-decoration: none; color: black">{{ picture.author.get_full_name }}</a>
+                        </p>
                         {% if picture.album %}
-                            <p class="card-text">Альбом: <a href="" style="text-decoration: none; color: black">{{ picture.album.name }}</a></p>
+                            <p class="card-text">Альбом: <a href="{% url 'webapp:album_detail' picture.album.pk %}"
+                                                            style="text-decoration: none; color: black">{{ picture.album.name }}</a>
+                            </p>
                         {% endif %}
+                        <a href="{% url 'webapp:picture_update' picture.pk %}"
+                           class="btn btn-dark">Редактировать</a>
+                        <a href="{% url 'webapp:picture_delete' picture.pk %}" class="btn btn-dark">Удалить</a>
                         <p class="card-text">В избранном у:
                             {% for user in picture.favorited_by.all %}
                                 <a href="">{{ user.get_full_name }}</a>
