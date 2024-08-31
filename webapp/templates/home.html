@@ -26,10 +26,12 @@
                                                style="text-decoration: none; color: black">{{ picture.album.name }}</a>
                                 </p>
                             {% endif %}
-                            <a href="{% url 'webapp:picture_update' picture.pk %}"
-                               class="btn btn-dark">Редактировать</a>
+                            {% if picture.author == request.user %}
+                                <a href="{% url 'webapp:picture_update' picture.pk %}"
+                                   class="btn btn-dark">Редактировать</a>
+                                <a href="{% url 'webapp:picture_delete' picture.pk %}" class="btn btn-dark">Удалить</a>
+                            {% endif %}
                             <a href="{% url 'webapp:picture_detail' picture.pk %}" class="btn btn-dark">Подробнее</a>
-                            <a href="{% url 'webapp:picture_delete' picture.pk %}" class="btn btn-dark">Удалить</a>
                         </div>
                     </div>
                 </div>

@@ -1,7 +1,6 @@
 from django.shortcuts import reverse, redirect
 from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
 from rest_framework.exceptions import PermissionDenied
-
 from webapp.forms import AlbumForm
 from webapp.models import Album, Picture
 from django.core.paginator import Paginator
@@ -50,9 +49,10 @@ class AlbumUpdateView(UpdateView):
     def form_valid(self, form):
         album = form.save()
         pictures = Picture.objects.filter(album=album)
-        for picture in pictures:
-            picture.private = album.private
-            picture.save()
+        if album.private:
+            for picture in pictures:
+                picture.private = True
+                picture.save()
         return super().form_valid(form)
 
     def get_success_url(self):
