@@ -1,0 +1,164 @@
+[
+{
+  "model": "webapp.picture",
+  "pk": 11,
+  "fields": {
+    "picture": "pictures/---------------1_lx2dOaK.jpg",
+    "caption": "Mountains",
+    "created_date": "2024-08-31T08:20:25.396Z",
+    "author": 1,
+    "album": 1,
+    "private": false,
+    "favorite": []
+  }
+},
+{
+  "model": "webapp.picture",
+  "pk": 12,
+  "fields": {
+    "picture": "pictures/---------------1_X5YFdxn.jpg",
+    "caption": "Manga",
+    "created_date": "2024-08-31T08:20:35.896Z",
+    "author": 1,
+    "album": 1,
+    "private": false,
+    "favorite": []
+  }
+},
+{
+  "model": "webapp.picture",
+  "pk": 16,
+  "fields": {
+    "picture": "pictures/---------------1_WglvKCy.jpg",
+    "caption": "Manga",
+    "created_date": "2024-08-31T08:28:45.583Z",
+    "author": 1,
+    "album": 1,
+    "private": false,
+    "favorite": []
+  }
+},
+{
+  "model": "webapp.picture",
+  "pk": 29,
+  "fields": {
+    "picture": "pictures/1352190_gtfE4Uj.png",
+    "caption": "adssad",
+    "created_date": "2024-08-31T12:09:07.393Z",
+    "author": 1,
+    "album": null,
+    "private": true,
+    "favorite": []
+  }
+},
+{
+  "model": "webapp.picture",
+  "pk": 30,
+  "fields": {
+    "picture": "pictures/---------------1_mfzr81M.jpg",
+    "caption": "ûפגפ",
+    "created_date": "2024-08-31T12:33:14.339Z",
+    "author": 1,
+    "album": 10,
+    "private": true,
+    "favorite": []
+  }
+},
+{
+  "model": "webapp.picture",
+  "pk": 31,
+  "fields": {
+    "picture": "pictures/---------------1_uRcdZM1.jpg",
+    "caption": "פûקקפק",
+    "created_date": "2024-08-31T12:38:19.931Z",
+    "author": 1,
+    "album": 10,
+    "private": true,
+    "favorite": []
+  }
+},
+{
+  "model": "webapp.album",
+  "pk": 1,
+  "fields": {
+    "name": "AdamPic",
+    "description": "Ýעמ ןנמסעמ עוסעמגûי גאנטך קעמבû קוךאעü גסו 1",
+    "author": 1,
+    "created_date": "2024-08-31T06:51:25.010Z",
+    "private": false,
+    "favorite": []
+  }
+},
+{
+  "model": "webapp.album",
+  "pk": 8,
+  "fields": {
+    "name": "Enhancement",
+    "description": "qwdqwdwqdqwd",
+    "author": 1,
+    "created_date": "2024-08-31T09:40:10.809Z",
+    "private": false,
+    "favorite": []
+  }
+},
+{
+  "model": "webapp.album",
+  "pk": 9,
+  "fields": {
+    "name": "qwdqwd",
+    "description": "dqwdqwd",
+    "author": 1,
+    "created_date": "2024-08-31T09:50:59.624Z",
+    "private": false,
+    "favorite": []
+  }
+},
+{
+  "model": "webapp.album",
+  "pk": 10,
+  "fields": {
+    "name": "qdwwqd",
+    "description": "qwdqdqwd",
+    "author": 1,
+    "created_date": "2024-08-31T10:20:31.549Z",
+    "private": false,
+    "favorite": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$720000$Kk4A6EtKid7HltgjOKdcQ1$LQAMhtCaxnL6Csmr7jt/mJlmbv9x2ONcCS/yVK550fo=",
+    "last_login": "2024-08-31T12:41:51.624Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "Adam",
+    "last_name": "Nemmish",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2024-08-30T17:20:14Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$720000$hip56YKSnYUwR4B7spf7qY$LgVSiA1n6tIJbFS2DX5bhHjw2aEm/21ORh8mLQ1OCkg=",
+    "last_login": "2024-08-31T12:41:04.522Z",
+    "is_superuser": false,
+    "username": "adam",
+    "first_name": "mister",
+    "last_name": "adam",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2024-08-31T10:01:59Z",
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]

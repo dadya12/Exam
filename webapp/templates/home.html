@@ -32,6 +32,13 @@
                                 <a href="{% url 'webapp:picture_delete' picture.pk %}" class="btn btn-dark">Удалить</a>
                             {% endif %}
                             <a href="{% url 'webapp:picture_detail' picture.pk %}" class="btn btn-dark">Подробнее</a>
+                            <a href="{% url 'api_v1:pic_fav' picture.pk %}" class="btn btn-dark">
+                                {% if picture.is_favorite %}
+                                    Удалить из избранного
+                                {% else %}
+                                    Добавить в избранное
+                                {% endif %}
+                            </a>
                         </div>
                     </div>
                 </div>

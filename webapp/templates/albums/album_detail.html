@@ -4,6 +4,13 @@
     <h1 style="margin-top: 50px">{{ album.name }}
         <a href="{% url 'webapp:album_update' album.pk %}" class="btn btn-primary">Обновить</a>
         <a href="{% url 'webapp:album_delete' album.pk %}" class="btn btn-primary">Удалить</a>
+        <a href="{% url 'api_v1:album_fav' album.pk %}" class="btn btn-dark">
+            {% if picture.is_favorite %}
+                Удалить из избранного
+            {% else %}
+                Добавить в избранное
+            {% endif %}
+        </a>
     </h1>
     <p>{{ album.description }}</p>
     <p>Автор: {{ album.author }}</p>
